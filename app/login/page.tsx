@@ -4,6 +4,7 @@ import { supabase } from "@/lib/supabaseClient";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,10 +30,10 @@ export default function Login() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 p-4 text-black">
-      <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-2xl">
-        <h1 className="mb-6 text-center text-3xl font-bold text-blue-600">
-          Login
+    <div className="flex min-h-screen items-center justify-center bg-purple-100 p-4 text-gray-800">
+      <div className="w-full max-w-md rounded-xl bg-white p-8 shadow-2xl border border-purple-200">
+        <h1 className="mb-6 text-center text-3xl font-bold text-purple-700">
+          เข้าสู่ระบบ
         </h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -46,7 +47,7 @@ export default function Login() {
               id="email"
               type="email"
               placeholder="Email"
-              className="w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+              className="w-full rounded-md border border-gray-300 p-2 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50"
               onChange={(e) => setEmail(e.target.value)}
               required
             />
@@ -63,7 +64,7 @@ export default function Login() {
               id="password"
               type="password"
               placeholder="Password"
-              className="w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+              className="w-full rounded-md border border-gray-300 p-2 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50"
               onChange={(e) => setPassword(e.target.value)}
               required
             />
@@ -71,19 +72,19 @@ export default function Login() {
 
           <button
             type="submit"
-            className="w-full transform rounded-full bg-blue-600 py-2.5 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
+            className="w-full transform rounded-full bg-purple-600 py-2.5 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-purple-700 focus:outline-none focus:ring-4 focus:ring-purple-300"
           >
             เข้าสู่ระบบ
           </button>
         </form>
 
         <div className="mt-6 text-center text-sm text-gray-600">
-          Don&apos;t have an account?{" "}
+          ยังไม่มีบัญชีใช่ไหม?{" "}
           <Link
             href="/register"
-            className="font-semibold text-blue-600 hover:underline"
+            className="font-semibold text-purple-600 hover:underline"
           >
-            Register here
+            สมัครสมาชิก
           </Link>
         </div>
       </div>

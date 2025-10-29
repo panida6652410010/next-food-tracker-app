@@ -35,6 +35,7 @@ export default function EditFood() {
         setUserId(data.user_id);
         setFoodName(data.foodname);
         setMeal(data.meal);
+
         let formattedDate = "";
         const rawDate = data.fooddate_at;
 
@@ -53,13 +54,13 @@ export default function EditFood() {
         }
 
         setFoodDateAt(formattedDate);
-        setUserId(data.user_id);
         setPreviewImage(data.food_image_url);
         setOldImageFile(data.food_image_url);
       }
     };
     fetchData();
   }, [id]);
+
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -134,9 +135,9 @@ export default function EditFood() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 p-4">
-      <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-2xl">
-        <h1 className="mb-6 text-center text-3xl font-bold text-blue-600">
+    <div className="flex min-h-screen items-center justify-center bg-purple-100 p-4">
+      <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl">
+        <h1 className="mb-6 text-center text-3xl font-bold text-purple-600">
           แก้ไขรายการอาหาร
         </h1>
 
@@ -149,7 +150,7 @@ export default function EditFood() {
               type="text"
               value={foodname}
               onChange={(e) => setFoodName(e.target.value)}
-              className="w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+              className="w-full rounded-md border border-gray-300 p-2 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50"
               required
             />
           </div>
@@ -161,7 +162,7 @@ export default function EditFood() {
             <select
               value={meal}
               onChange={(e) => setMeal(e.target.value)}
-              className="w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+              className="w-full rounded-md border border-gray-300 p-2 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50"
               required
             >
               <option value="">เลือกมื้ออาหาร</option>
@@ -180,7 +181,7 @@ export default function EditFood() {
               type="date"
               value={foodDateAt}
               onChange={(e) => setFoodDateAt(e.target.value)}
-              className="w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+              className="w-full rounded-md border border-gray-300 p-2 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50"
               required
             />
           </div>
@@ -191,7 +192,7 @@ export default function EditFood() {
             </label>
             <label
               htmlFor="foodImage"
-              className="flex w-full cursor-pointer items-center justify-center rounded-md border border-blue-500 bg-blue-50 py-2.5 font-semibold text-blue-700 transition-colors hover:bg-blue-100"
+              className="flex w-full cursor-pointer items-center justify-center rounded-md border border-purple-500 bg-purple-50 py-2.5 font-semibold text-purple-700 transition-colors hover:bg-purple-100"
             >
               เลือกรูปภาพใหม่
             </label>
@@ -209,12 +210,12 @@ export default function EditFood() {
               <p className="mb-2 text-sm font-medium text-gray-700">
                 Image Preview
               </p>
-              <div className="relative mx-auto h-40 w-full overflow-hidden rounded-md border-2 border-blue-500 shadow-md">
+              <div className="relative mx-auto h-40 w-full overflow-hidden rounded-md border-2 border-purple-500 shadow-md">
                 <Image
                   src={previewImage}
                   alt="Food Preview"
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  className="object-cover"
                 />
               </div>
             </div>
@@ -228,7 +229,7 @@ export default function EditFood() {
             </Link>
             <button
               type="submit"
-              className="w-1/2 transform rounded-full bg-blue-600 py-2.5 font-semibold text-white shadow-md transition-all duration-300 hover:scale-105 hover:bg-blue-700"
+              className="w-1/2 transform rounded-full bg-purple-600 py-2.5 font-semibold text-white shadow-md transition-all duration-300 hover:scale-105 hover:bg-purple-700"
             >
               บันทึก
             </button>

@@ -31,21 +31,19 @@ export default function Register() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // บันทึกรูปภาพไปยัง Supabase Storage
     let image_url = "";
     if (image_file) {
       const new_image_file_name = `${Date.now()}-${image_file.name}`;
 
-      // อัปโหลดรูปภาพไปยัง Supabase Storage
       const { error } = await supabase.storage
         .from("user_bk")
         .upload(new_image_file_name, image_file);
+
       if (error) {
         alert("เกิดข้อผิดพลาดในการอัปโหลดรูปภาพ");
         console.log(error.message);
         return;
       } else {
-        // get url ของรูปภาพที่อัปโหลด
         const { data } = supabase.storage
           .from("user_bk")
           .getPublicUrl(new_image_file_name);
@@ -53,7 +51,6 @@ export default function Register() {
       }
     }
 
-    // บันทึกข้อมูลงานลงในตาราง tasks
     const { error } = await supabase.from("user_tb").insert({
       fullname: fullName,
       email: email,
@@ -78,11 +75,12 @@ export default function Register() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 p-4 text-black">
-      <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-2xl">
-        <h1 className="mb-6 text-center text-3xl font-bold text-blue-600">
-          Register
+    <div className="flex min-h-screen items-center justify-center bg-purple-100 p-4 text-gray-800">
+      <div className="w-full max-w-md rounded-xl bg-white p-8 shadow-2xl border border-purple-200">
+        <h1 className="mb-6 text-center text-3xl font-bold text-purple-700">
+          สมัครสมาชิก
         </h1>
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label
@@ -95,7 +93,7 @@ export default function Register() {
               id="name"
               type="text"
               placeholder="Full Name"
-              className="w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+              className="w-full rounded-md border border-gray-300 p-2 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               required
@@ -113,7 +111,7 @@ export default function Register() {
               id="email"
               type="email"
               placeholder="Email"
-              className="w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+              className="w-full rounded-md border border-gray-300 p-2 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -131,7 +129,7 @@ export default function Register() {
               id="password"
               type="password"
               placeholder="Password"
-              className="w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+              className="w-full rounded-md border border-gray-300 p-2 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -148,7 +146,7 @@ export default function Register() {
                   type="radio"
                   name="gender"
                   value="male"
-                  className="text-blue-600 focus:ring-blue-500"
+                  className="text-purple-600 focus:ring-purple-500"
                   onChange={(e) => setGender(e.target.value)}
                 />
                 <span className="ml-2 text-gray-700">ชาย</span>
@@ -158,7 +156,7 @@ export default function Register() {
                   type="radio"
                   name="gender"
                   value="female"
-                  className="text-blue-600 focus:ring-blue-500"
+                  className="text-purple-600 focus:ring-purple-500"
                   onChange={(e) => setGender(e.target.value)}
                 />
                 <span className="ml-2 text-gray-700">หญิง</span>
@@ -178,14 +176,16 @@ export default function Register() {
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-              className="w-full rounded-md border border-gray-300 p-2 text-gray-500 file:mr-4 file:rounded-md file:border-0 file:bg-blue-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-blue-700 hover:file:bg-blue-100"
+              className="w-full rounded-md border border-gray-300 p-2 text-gray-500 file:mr-4 file:rounded-md file:border-0 file:bg-purple-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-purple-700 hover:file:bg-purple-100"
             />
           </div>
 
           {previewImage && (
             <div className="mb-4 text-center">
-              <p className="text-sm font-medium text-gray-700">Image Preview</p>
-              <div className="relative mx-auto mt-2 h-32 w-32 overflow-hidden rounded-full border-2 border-blue-500 shadow-md">
+              <p className="text-sm font-medium text-gray-700">
+                ตัวอย่างรูปโปรไฟล์
+              </p>
+              <div className="relative mx-auto mt-2 h-32 w-32 overflow-hidden rounded-full border-2 border-purple-500 shadow-md">
                 <Image
                   src={previewImage}
                   alt="Profile Preview"
@@ -198,19 +198,19 @@ export default function Register() {
 
           <button
             type="submit"
-            className="w-full transform rounded-full bg-blue-600 py-2.5 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
+            className="w-full transform rounded-full bg-purple-600 py-2.5 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-purple-700 focus:outline-none focus:ring-4 focus:ring-purple-300"
           >
             ลงทะเบียน
           </button>
         </form>
 
         <div className="mt-6 text-center text-sm text-gray-600">
-          Already have an account?{" "}
+          มีบัญชีอยู่แล้วใช่ไหม?{" "}
           <Link
             href="/login"
-            className="font-semibold text-blue-600 hover:underline"
+            className="font-semibold text-purple-600 hover:underline"
           >
-            Login here
+            เข้าสู่ระบบ
           </Link>
         </div>
       </div>
